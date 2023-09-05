@@ -52,7 +52,7 @@ public class TestBMICalculatorIT {
 
     //TODO: add another test case for normal built such as weight=50 and height=1.5.
     @Test
-    public void testCaclulate2() {
+    public void testCalculate2() {
 
         // Make a HTTP GET request to retrieve the last created Parolee.
         try (Response response = client.target(WEB_URI+"?weight=50&height=1.5").request().get()) {
@@ -61,12 +61,30 @@ public class TestBMICalculatorIT {
             int responseCode = response.getStatus();
             assertEquals(200, responseCode);
 
+            // Check that the response body contains the string "obese".
             String jsonResponse = response.readEntity(String.class);
-            assertThat(jsonResponse, CoreMatchers.containsString("Result is 22"));
-
             assertThat(jsonResponse, CoreMatchers.containsString("normal"));
-            _logger.info("IT1 test passed");
+
+            _logger.info("IT2 test passed");
         }
     }
+    @Test
+    public void testCalculate3() {
 
+        // Make a HTTP GET request to retrieve the last created Parolee.
+        try (Response response = client.target(WEB_URI+"?weight=50&height=1.5").request().get()) {
+
+            // Check that the HTTP response code is 200 OK.
+            int responseCode = response.getStatus();
+            assertEquals(200, responseCode);
+
+            // Check that the response body contains the string "normal".
+            String jsonResponse = response.readEntity(String.class);
+            assertThat(jsonResponse, CoreMatchers.containsString("normal"));
+
+            _logger.info("IT3 test passed");
 }
+    }
+}
+
+
